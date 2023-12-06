@@ -1,13 +1,18 @@
-import { Button } from "@/components/ui/button"
+import { ModeToggle } from "@/components/ui/toggle-mode"
+import ToggleMenu from "Components/toggleMenu"
 
 export default function Web() {
   return (
-    <>
-    <div className="w-full h-screen flex flex-col ">
-        {/* put sections here */}
-
-
+    <div className="flex h-screen w-full flex-col ">
+      <div className="flex-1">
+        <span className="tablet:hidden float-right flex">
+          <ModeToggle />
+        </span>
+        <span className="float-right flex">
+          <ToggleMenu />
+        </span>
+        {/* <span className="float-right flex"></span> */}
+      </div>
     </div>
-    </>
   )
 }
