@@ -1,42 +1,36 @@
 "use client"
- 
+import { Button } from "@/components/ui/button"
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
- 
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
- 
+
 export function ThemeModeToggle() {
-  const { setTheme } = useTheme()
- 
+  const { theme, setTheme } = useTheme()
+  const handleThemeToggle = () => {
+    if (theme === "light") {
+      setTheme("dark")
+    } else if (theme === "dark") {
+      setTheme("light")
+    }
+  }
+
   return (
-    <div className="fixed top-0 right-0">
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="fixed  right-0 top-1.5">
+      <Button variant="secondary">
+        <label htmlFor="theme-toggle" className="relative inline-block cursor-pointer">
+          <div className="dot h-6 w-6 transform transition-transform">
+            {theme === "light" ? <Moon className="h-6 w-6" /> : <Sun className="h-6 w-6" />}
+          </div>
+
+          <input
+            type="checkbox"
+            id="theme-toggle"
+            className="sr-only"
+            checked={theme === "dark"}
+            onChange={handleThemeToggle}
+          />
+        </label>
+      </Button>
     </div>
   )
 }
